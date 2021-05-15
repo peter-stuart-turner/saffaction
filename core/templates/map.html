@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet'/>
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{ hello }}</h1>
+    <div id="myDiv"></div>
+    <script src="{% static 'vendor/plotly-latest.min.js' %}"></script>
+    <script>
+        {#var url = "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson";#}
+        var url = "{% static 'geo/provinces.json' %}";
+
+        Plotly.d3.json(url, (err, raw) => {
+            var lon = raw.features.map(f => f.geometry.coordinates[0]);
+            var lat = raw.features.map(f => f.geometry.coordinates[1]);
+            var z = raw.features.map(f => f.properties.mag);
+
+            var data = [
+                {type: "scattermapbox", lon: lon, lat: lat, z: z, hoverinfo: "y"}
+            ];
+
+            var layout = {
+                mapbox: {style: "dark", zoom: 2, center: {lon: -150, lat: 60}},
+                margin: {t: 0, b: 0}
+            };
+
+
+            var config = {mapboxAccessToken: "pk.eyJ1IjoicGV0ZXItc3R1YXJ0IiwiYSI6ImNrb3E1c2R1MjBsYzQydW9qdzBhOXlzZWUifQ.9kONfGsQB7B9--cuoQifyA"};
+
+            Plotly.newPlot('myDiv', data, layout, config);
+        })
+    </script>
+{% endblock %}

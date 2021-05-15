@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .node rect {
+            cursor: move;
+            fill-opacity: .9;
+            shape-rendering: crispEdges;
+        }
+
+        .node text {
+            pointer-events: none;
+            /* text-shadow: 0 1px 0 #fff; */
+        }
+
+        .link {
+            fill: none;
+            stroke: #464243;
+            stroke-opacity: .2;
+        }
+
+        .link:hover {
+            stroke-opacity: .5;
+            stroke: #464243;
+        }
+    </style>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        import json_inputs from '{% static 'js/data.js' %}';
+    </script>
+    <script src="{% static 'js/sankey.js' %}"></script>
+    <script type="module" src="{% static 'js/analytica-sankey.js' %}"></script>
+{% endblock %}
