@@ -120,7 +120,7 @@ var units = "";
 // set the dimensions and margins of the graph
 var margin = { top: 10, right: 10, bottom: 10, left: 10 },
     width = 1400 - margin.left - margin.right,
-    height = 650 - margin.top - margin.bottom;
+    height = 800 - margin.top - margin.bottom;
 
 // format variables
 var formatNumber = d3.format(",.0f"),    // zero decimal places
@@ -137,7 +137,7 @@ var svg = d3.select("body").append("svg")
         "translate(" + margin.left + "," + margin.top + ")");
 
 // Set the sankey diagram properties
-const NODE_WIDTH = 280;
+const NODE_WIDTH = 380;
 const NODE_PADDING = 10;
 
 var sankey = d3.sankey()
@@ -190,7 +190,9 @@ var node = svg.append("g").selectAll(".node")
 
 // add the rectangles for the nodes
 node.append("rect")
-    .attr("height", function (d) { return d.dy + 8.1; })
+    .attr("height", (d) => {
+        return d.dy + 8.1;
+    })
     .attr("width", sankey.nodeWidth())
     .attr("rx", '2px')
     .attr("ry", '2px')
@@ -218,7 +220,7 @@ node.append('text')
         if (d.type === 'problem_category' || d.type === 'solution') {
             return "11px";
         } else {
-            return "8.5px";
+            return "10px";
         }
     })
     .attr("fill", d => {

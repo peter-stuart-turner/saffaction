@@ -6,3 +6,5 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         self.stdout.write(f'Generating data from Excel file')
+
+

@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_excel('mindmap-v3.xlsx', sheet_name='solutions')
+df = pd.read_excel('core/static/fixtures/mindmap-v3.xlsx', sheet_name='solutions')
 
 def find_category(i, row):
     if pd.isna(row['Problem']) or pd.isnull(row['Ideas']):
